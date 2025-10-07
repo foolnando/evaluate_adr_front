@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
 import Cronometro from '../components/Cronometro';
 import MaterialApoioModal from '../components/MaterialApoioModal';
+import emailjs from '@emailjs/browser';
 
 export default function DocumentacaoPage() {
   const { participantData, setParticipantData } = useAppContext();
@@ -52,32 +53,54 @@ export default function DocumentacaoPage() {
       decisao: decisao,
     }));
 
-    // Enviar dados por email e salvar localmente
+    // Salvar dados localmente (fallback)
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          nome: participantData.nome,
-          email: participantData.email,
-          modelo: participantData.modelo,
-          tempo: tempoFinal,
-          consultas: consultas,
-          decisao: decisao,
-        }),
-      });
+      const experimentData = {
+        timestamp: new Date().toISOString(),
+        nome: participantData.nome,
+        email: participantData.email,
+        modelo: participantData.modelo,
+        tempo: tempoFinal,
+        consultas: consultas,
+        decisao: decisao,
+      };
 
-      if (!response.ok) {
-        throw new Error('Falha ao enviar dados');
-      }
+      // Salvar no localStorage como fallback
+      const savedData = JSON.parse(localStorage.getItem('adr-experiments') || '[]');
+      savedData.push(experimentData);
+      localStorage.setItem('adr-experiments', JSON.stringify(savedData));
+      
+      console.log('Dados salvos localmente no localStorage');
+    } catch (error) {
+      console.error('Erro ao salvar dados localmente:', error);
+    }
 
-      const result = await response.json();
-      console.log('Dados enviados com sucesso:', result);
+    // Enviar email via EmailJS
+    try {
+      const templateParams = {
+        to_email: 'fernando.neves@icomp.ufam.edu.br',
+        from_name: participantData.nome,
+        from_email: participantData.email,
+        subject: `experimento adr ${participantData.nome}`,
+        nome: participantData.nome,
+        email: participantData.email,
+        modelo: participantData.modelo,
+        tempo: tempoFinal,
+        consultas: consultas,
+        decisao: decisao,
+      };
+
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      );
+
+      console.log('Email enviado com sucesso via EmailJS');
       
     } catch (error) {
-      console.error('Erro ao enviar dados:', error);
+      console.error('Erro ao enviar email via EmailJS:', error);
       // Mesmo com erro, continuar para a tela de obrigado
     }
 
