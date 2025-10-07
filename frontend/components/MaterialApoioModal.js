@@ -38,11 +38,11 @@ const materialA = (
 
   const materialB = (
     <div>
-      <h3>Modelo Nygard: Padrão "ADR" (Architectural Decision Record) Simplificado</h3>
+      <h3>Modelo Nygard: Padrão &quot;ADR&quot; (Architectural Decision Record) Simplificado</h3>
       <p>Este modelo é um registro mais formal e focado no estado.</p>
       <ul>
         <li><strong>Título:</strong> Um título curto para a decisão.</li>
-        <li><strong>Status:</strong> Proposta, Aceita, Rejeitada, Obsoleta. (Para esta atividade, use "Aceita").</li>
+        <li><strong>Status:</strong> Proposta, Aceita, Rejeitada, Obsoleta. (Para esta atividade, use &quot;Aceita&quot;).</li>
         <li><strong>Contexto:</strong> Descreva o cenário e o problema a ser resolvido.</li>
         <li><strong>Decisão:</strong> Descreva de forma clara a decisão técnica tomada.</li>
         <li><strong>Consequências:</strong> Liste as consequências positivas e negativas da decisão para o time, o projeto e a arquitetura.</li>
