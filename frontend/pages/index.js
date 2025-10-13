@@ -10,7 +10,9 @@ export default function HomePage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Submitting form with:', { nome, email });
     setParticipantData((prev) => ({ ...prev, nome, email }));
+    console.log('Navigating to /documentacao');
     router.push('/documentacao');
   };
 

@@ -18,10 +18,12 @@ export default function DocumentacaoPage() {
 
   // Redireciona se o usuário não se identificou
   useEffect(() => {
+    console.log('DocumentacaoPage - participantData:', participantData);
     if (!participantData.nome) {
+      console.log('No participant name, redirecting to home');
       router.push('/');
     }
-  }, [participantData.nome, router]);
+  }, [participantData, router]);
   
   // Decide o modelo A/B e salva no contexto uma única vez
   useEffect(() => {
