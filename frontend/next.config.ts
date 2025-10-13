@@ -6,7 +6,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true
   },
-  // Deixar o GitHub Actions gerenciar o basePath automaticamente
+  // Configuração explícita para GitHub Pages
+  basePath: '/evaluate_adr_front',
+  assetPrefix: '/evaluate_adr_front/',
 };
 
 export default nextConfig;
