@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true
   },
-  // Removido basePath e assetPrefix para permitir que o GitHub Actions gerencie automaticamente
+  // Deixar o GitHub Actions gerenciar o basePath automaticamente
 };
 
 export default nextConfig;
