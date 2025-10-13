@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAppContext } from '../context/AppContext';
-import Cronometro from '../components/Cronometro';
+// import Cronometro from '../components/Cronometro';
 import MaterialApoioModal from '../components/MaterialApoioModal';
 import emailjs from '@emailjs/browser';
 
@@ -43,7 +43,10 @@ export default function DocumentacaoPage() {
   };
 
   const handleFinalizar = async () => {
-    const tempoFinal = Math.round((Date.now() - startTime) / 1000);
+    const finishedAtMs = Date.now();
+    const tempoFinal = Math.round((finishedAtMs - startTime) / 1000);
+    const startedAtISO = startTime ? new Date(startTime).toISOString() : null;
+    const finishedAtISO = new Date(finishedAtMs).toISOString();
     
     // Atualizar dados do participante
     setParticipantData((prev) => ({
@@ -51,6 +54,8 @@ export default function DocumentacaoPage() {
       tempo: tempoFinal,
       consultas: consultas,
       decisao: decisao,
+      iniciadoEm: startedAtISO,
+      finalizadoEm: finishedAtISO,
     }));
 
     // Salvar dados localmente (fallback)
@@ -63,6 +68,8 @@ export default function DocumentacaoPage() {
         tempo: tempoFinal,
         consultas: consultas,
         decisao: decisao,
+        iniciadoEm: startedAtISO,
+        finalizadoEm: finishedAtISO,
       };
 
       // Salvar no localStorage como fallback
@@ -88,6 +95,8 @@ export default function DocumentacaoPage() {
         tempo: tempoFinal,
         consultas: consultas,
         decisao: decisao,
+        iniciadoEm: startedAtISO,
+        finalizadoEm: finishedAtISO,
       };
 
       await emailjs.send(
@@ -118,8 +127,7 @@ export default function DocumentacaoPage() {
         </div>
       ) : (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <Cronometro startTime={startTime} isRunning={true} />
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '1rem' }}>
             <button onClick={handleConsultarMaterial} className="button-secondary">
               Consultar Material de Apoio
             </button>
