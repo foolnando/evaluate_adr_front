@@ -33,6 +33,31 @@ const materialA = (
         <p>Para cada alternativa considerada, detalhe os pontos positivos e negativos.</p>
       </li>
     </ul>
+    
+    <h4>Exemplo Prático:</h4>
+    <div style={{ backgroundColor: '#f5f5f5', padding: '15px', borderRadius: '5px', marginTop: '10px', fontFamily: 'monospace', fontSize: '12px' }}>
+      <strong># ADR-001: Implementação de Cache Redis para Melhorar Performance</strong><br/><br/>
+      <strong>Status:</strong> Aceita | <strong>Decisores:</strong> Equipe de Arquitetura | <strong>Data:</strong> 2024-01-15<br/><br/>
+      <strong>## Contexto e Declaração do Problema</strong><br/>
+      Nossa aplicação web está enfrentando lentidão significativa nas consultas ao banco de dados, especialmente em operações de leitura frequentes. Como podemos melhorar a performance sem comprometer a consistência dos dados?<br/><br/>
+      <strong>## Direcionadores da Decisão</strong><br/>
+      - Performance: Reduzir tempo de resposta das consultas<br/>
+      - Escalabilidade: Suportar maior volume de usuários<br/>
+      - Custo: Minimizar custos de infraestrutura<br/><br/>
+      <strong>## Opções Consideradas</strong><br/>
+      1. Implementar cache em memória (Redis)<br/>
+      2. Otimizar consultas SQL<br/>
+      3. Implementar cache no nível da aplicação<br/><br/>
+      <strong>## Resultado da Decisão</strong><br/>
+      Escolhemos implementar Redis como cache em memória. Esta opção oferece melhor performance, é facilmente escalável e tem boa integração com nossa stack tecnológica.<br/><br/>
+      <strong>## Prós e Contras das Opções</strong><br/>
+      <strong>Redis:</strong><br/>
+      ✅ Prós: Alta performance, escalabilidade, persistência opcional<br/>
+      ❌ Contras: Complexidade adicional, custo de infraestrutura<br/><br/>
+      <strong>Otimização SQL:</strong><br/>
+      ✅ Prós: Sem custos adicionais, solução nativa<br/>
+      ❌ Contras: Melhoria limitada, complexidade de manutenção
+    </div>
   </div>
 );
 
@@ -47,6 +72,27 @@ const materialA = (
         <li><strong>Decisão:</strong> Descreva de forma clara a decisão técnica tomada.</li>
         <li><strong>Consequências:</strong> Liste as consequências positivas e negativas da decisão para o time, o projeto e a arquitetura.</li>
       </ul>
+      
+      <h4>Exemplo Prático:</h4>
+      <div style={{ backgroundColor: '#f5f5f5', padding: '15px', borderRadius: '5px', marginTop: '10px', fontFamily: 'monospace', fontSize: '12px' }}>
+        <strong>ADR-001: Implementação de Cache Redis para Melhorar Performance</strong><br/><br/>
+        <strong>Status:</strong> Aceita<br/><br/>
+        <strong>Contexto:</strong><br/>
+        Nossa aplicação web está enfrentando lentidão significativa nas consultas ao banco de dados, especialmente em operações de leitura frequentes. O tempo de resposta atual está impactando negativamente a experiência do usuário e limitando nossa capacidade de escalar.<br/><br/>
+        <strong>Decisão:</strong><br/>
+        Implementaremos Redis como solução de cache em memória para otimizar as consultas mais frequentes ao banco de dados. O Redis será configurado para armazenar dados de leitura frequente com TTL (Time To Live) apropriado para cada tipo de dado.<br/><br/>
+        <strong>Consequências:</strong><br/>
+        <strong>Positivas:</strong><br/>
+        - Redução significativa no tempo de resposta das consultas<br/>
+        - Melhoria na experiência do usuário<br/>
+        - Maior capacidade de escalar horizontalmente<br/>
+        - Redução da carga no banco de dados principal<br/><br/>
+        <strong>Negativas:</strong><br/>
+        - Complexidade adicional na arquitetura<br/>
+        - Custo adicional de infraestrutura para o Redis<br/>
+        - Necessidade de gerenciar consistência entre cache e banco<br/>
+        - Curva de aprendizado para a equipe
+      </div>
     </div>
   );
 
