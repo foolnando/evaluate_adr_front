@@ -137,6 +137,10 @@ export default function DocumentacaoPage() {
           <textarea
             value={decisao}
             onChange={(e) => setDecisao(e.target.value)}
+            onPaste={(e) => {
+              e.preventDefault();
+              alert('Por favor, digite a decisão arquitetural em tempo real. Não é permitido colar texto.');
+            }}
             placeholder="Documente a decisão arquitetural aqui..."
             style={{
               width: '100%',
