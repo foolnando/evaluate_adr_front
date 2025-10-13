@@ -6,9 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true
   },
-  // Para GitHub Pages, configure o basePath com o nome do repositório
-  basePath: process.env.NODE_ENV === 'production' ? '/evaluate_adr_front' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/evaluate_adr_front/' : '',
+  // Removido basePath e assetPrefix para permitir que o GitHub Actions gerencie automaticamente
 };
 
 export default nextConfig;

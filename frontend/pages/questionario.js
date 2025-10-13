@@ -39,23 +39,20 @@ export default function QuestionarioPage() {
     };
 
     try {
-      const response = await fetch('http://localhost:5001/api/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
+      // Salvar dados localmente (compatível com GitHub Pages)
+      const savedData = JSON.parse(localStorage.getItem('adr-experiments') || '[]');
+      savedData.push({
+        ...payload,
+        timestamp: new Date().toISOString(),
       });
-
-      if (!response.ok) {
-        throw new Error('Falha ao enviar os dados.');
-      }
-
+      localStorage.setItem('adr-experiments', JSON.stringify(savedData));
+      
+      console.log('Questionário salvo localmente');
       router.push('/obrigado');
 
     } catch (error) {
       console.error(error);
-      alert('Houve um erro ao enviar suas respostas. Tente novamente.');
+      alert('Houve um erro ao salvar suas respostas. Tente novamente.');
     } finally {
       setLoading(false);
     }

@@ -113,8 +113,8 @@ export default function DocumentacaoPage() {
       // Mesmo com erro, continuar para a tela de obrigado
     }
 
-    // Ir para a tela de obrigado
-    router.push('/obrigado');
+    // Ir para o questionário
+    router.push('/questionario');
   };
 
   return (
