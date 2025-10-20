@@ -80,7 +80,7 @@ export default function ObrigadoPage() {
       <p>
         Agora, por favor responda o questionário disponível em:{' '}
         <a 
-          href="https://forms.gle/f4NaYKXasyvbanmR8"
+          href="https://forms.gle/NQU4W4vWkH9RMuyUA"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -89,7 +89,7 @@ export default function ObrigadoPage() {
             fontWeight: 'bold'
           }}
         >
-          https://forms.gle/f4NaYKXasyvbanmR8
+          https://forms.gle/NQU4W4vWkH9RMuyUA
         </a>
       </p>
     </main>
